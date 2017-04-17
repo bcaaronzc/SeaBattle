@@ -41,6 +41,11 @@ public class Game {
 	private void addShip(int initSize, boolean initIsVertical, int number){
 		boolean repeat = false;
 		int randomRow, randomCol;
+		
+		// Temp Counter
+		int counter = 0;
+		//
+		
 		do{
 			// Generate a random position under two conditions (vertical and horizontal)
 			if (initIsVertical){
@@ -55,21 +60,31 @@ public class Game {
 			// Check if overlap
 			// when vertical
 			if (initIsVertical){
-				for (int row = randomRow; row < randomRow + initSize; row++){
-					if (gameBoard[row - 1][randomCol - 1] == 1 && gameBoard[row - 1][randomCol] == 1 && gameBoard[row - 1][randomCol + 1] == 1 &&
-							gameBoard[row][randomCol - 1] == 1 && gameBoard[row][randomCol] == 1 && gameBoard[row][randomCol + 1] == 1 &&
-							gameBoard[row + 1][randomCol - 1] == 1 && gameBoard[row + 1][randomCol] == 1 && gameBoard[row - 1][randomCol + 1] == 1){
-						repeat = true;
+				for (int row = randomRow - 1; row <= randomRow + 1 + initSize; row++){
+					for (int col = randomCol - 1; col <= randomCol + 1; col++){
+						if (gameBoard[row][col] == 1){
+							System.out.println(counter++);
+							repeat = true;
+							break;
+						}
+						else {
+							repeat = false;
+						}
 					}
 				}
 			}
 			// when horizontal
 			else{
-				for (int col = randomCol; col < randomCol + initSize; col++){
-					if (gameBoard[randomRow - 1][col - 1] == 1 && gameBoard[randomRow - 1][col] == 1 && gameBoard[randomRow - 1][col + 1] == 1 &&
-							gameBoard[randomRow][col - 1] == 1 && gameBoard[randomRow][col] == 1 && gameBoard[randomRow][col + 1] == 1 &&
-							gameBoard[randomRow + 1][col - 1] == 1 && gameBoard[randomRow + 1][col] == 1 && gameBoard[randomRow + 1][col + 1] == 1){
-						repeat = true;
+				for (int row = randomRow - 1; row <= randomRow + 1; row++){
+					for (int col = randomCol - 1; col <= randomCol + 1 + initSize; col++){
+						if (gameBoard[row][col] == 1){
+							System.out.println(counter++);
+							repeat = true;
+							break;
+						}
+						else {
+							repeat = false;
+						}
 					}
 				}
 			}
