@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Game {
 	static int smallBoardRows = 10;
 	static int smallBoardCols = 10;
@@ -106,6 +108,17 @@ public class Game {
 				gameBoard[battleShips[number].loc[0]][col] = 1;
 			}
 		}
+	}
+
+	private int[] playerChoice(){
+		Scanner input = new Scanner(System.in);
+		int choice[] = new int[2];
+		System.out.print("Please enter the row number: ");
+		choice[0] = input.nextInt();
+		System.out.print("Please enter the col number: ");
+		choice[1] = input.nextInt();
+		input.close();
+		return choice;
 	}
 	
 	public void showBoard(){
