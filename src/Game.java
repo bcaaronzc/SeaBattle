@@ -1,6 +1,6 @@
 public class Game {
-	static int BOARDROWS = 7;
-	static int BOARDCOLS = 7;
+	static int BOARDROWS = 10;
+	static int BOARDCOLS = 10;
 	int gameBoard[][] = new int[BOARDROWS][BOARDCOLS];
 	
 	int sizeTest = 3;
