@@ -25,7 +25,6 @@ public class Game {
 		
 		// Add ships
 		for (int i = 0; i < difficulty; i++){
-			int randomSize = (int)(Math.random() * 4);
 			boolean randomDirectionBool;
 			int randomDirection = (int)(Math.random() * 2);
 			if (randomDirection == 0){
@@ -63,7 +62,7 @@ public class Game {
 				for (int row = randomRow - 1; row <= randomRow + 1 + initSize; row++){
 					for (int col = randomCol - 1; col <= randomCol + 1; col++){
 						if (gameBoard[row][col] == 1){
-							System.out.println(counter++);
+							System.out.println("Try " + counter++);
 							repeat = true;
 							break;
 						}
@@ -78,7 +77,7 @@ public class Game {
 				for (int row = randomRow - 1; row <= randomRow + 1; row++){
 					for (int col = randomCol - 1; col <= randomCol + 1 + initSize; col++){
 						if (gameBoard[row][col] == 1){
-							System.out.println(counter++);
+							System.out.println("Try " + counter++);
 							repeat = true;
 							break;
 						}
