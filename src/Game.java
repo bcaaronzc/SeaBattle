@@ -9,7 +9,7 @@ public class Game {
 	int maxShipNum = ((BOARDROWS + 1) / 2) * ((BOARDCOLS + 1) / 2);
 	BattleShip battleShips[] = new BattleShip[maxShipNum];
 	
-	public void newGame(){
+	private void newGame(){
 		// TODO Implement function to change difficulty, default 3
 		// Initialize the game board
 		for (int row = 0; row < BOARDROWS; row++){
@@ -42,7 +42,7 @@ public class Game {
 		int randomRow, randomCol;
 		
 		// Temp Counter
-		int counter = 0;
+		int counter = 1;
 		//
 		
 		do{
