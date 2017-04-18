@@ -61,8 +61,8 @@ public class Game {
 			// Check if overlap
 			// when vertical
 			if (initIsVertical){
-				for (int row = randomRow - 1; row <= randomRow + 1 + initSize; row++){
-					for (int col = randomCol - 1; col <= randomCol + 1; col++){
+				for (int row = randomRow - 1; row < randomRow + 1 + initSize; row++){
+					for (int col = randomCol - 1; col < randomCol + 1; col++){
 						if (gameBoard[row][col] == 1){
 							System.out.println("Try " + counter++);
 							repeat = true;
@@ -76,8 +76,8 @@ public class Game {
 			}
 			// when horizontal
 			else{
-				for (int row = randomRow - 1; row <= randomRow + 1; row++){
-					for (int col = randomCol - 1; col <= randomCol + 1 + initSize; col++){
+				for (int row = randomRow - 1; row < randomRow + 1; row++){
+					for (int col = randomCol - 1; col < randomCol + 1 + initSize; col++){
 						if (gameBoard[row][col] == 1){
 							System.out.println("Try " + counter++);
 							repeat = true;
@@ -110,13 +110,23 @@ public class Game {
 		}
 	}
 
+	private void fireCannon(int[] playerChoice){
+		if (gameBoard[playerChoice[0]][playerChoice[1]] == 1){
+			gameBoard[playerChoice[0]][playerChoice[1]] = 2;
+			System.out.println("Hit!");
+		}
+		else {
+			System.out.println("Not hit.");
+		}
+	}
+	
 	private int[] playerChoice(){
 		Scanner input = new Scanner(System.in);
 		int choice[] = new int[2];
 		System.out.print("Please enter the row number: ");
-		choice[0] = input.nextInt();
+		choice[0] = input.nextInt() + 1;
 		System.out.print("Please enter the col number: ");
-		choice[1] = input.nextInt();
+		choice[1] = input.nextInt() + 1;
 		input.close();
 		return choice;
 	}
