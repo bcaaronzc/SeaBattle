@@ -6,12 +6,13 @@ public class Game {
 	static int BOARDROWS = smallBoardRows + 2;
 	static int BOARDCOLS = smallBoardCols + 2;
 	static int difficulty = 3;
+	static int sinkShip = 0;
 	int gameBoard[][] = new int[BOARDROWS][BOARDCOLS];
 	
 	int maxShipNum = ((BOARDROWS + 1) / 2) * ((BOARDCOLS + 1) / 2);
 	BattleShip battleShips[] = new BattleShip[maxShipNum + 1];
 	
-	private void newGame(){
+	public void newGame(){
 		// TODO Implement function to change difficulty, default 3
 		// Initialize the game board
 		for (int row = 0; row < BOARDROWS; row++){
@@ -39,7 +40,7 @@ public class Game {
 		}
 	}
 	
-	private void addShip(int initSize, boolean initIsVertical, int number){
+	public void addShip(int initSize, boolean initIsVertical, int number){
 		boolean repeat = false;
 		int randomRow, randomCol;
 		
@@ -110,35 +111,73 @@ public class Game {
 		}
 	}
 
-	private void fireCannon(int[] playerChoice){
-		if (gameBoard[playerChoice[0]][playerChoice[1]] == 1){
-			gameBoard[playerChoice[0]][playerChoice[1]] = 2;
-			System.out.println("Hit!");
-		}
-		else {
-			System.out.println("Not hit.");
+	public void fireCannon(){
+		int playerChoice[] = playerChoice();
+		int choice = gameBoard[playerChoice[0]][playerChoice[1]];
+		switch (choice){
+		case -1:
+			System.out.println("You aleady hit this point.");
+			break;
+		case 0:
+			System.out.println("You missed.");
+			break;
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+			System.out.println("You hit battle ship " + choice + "!");
+			gameBoard[playerChoice[0]][playerChoice[1]] = -1;
+			hitShip(choice, playerChoice);
+			break;
+		default: System.out.println("This should not happen, there must be something wrong...");
 		}
 	}
 	
-	private int[] playerChoice(){
+	// Read data from the player, used to send data to fireCannon(int[])
+	public int[] playerChoice(){
 		Scanner input = new Scanner(System.in);
 		int choice[] = new int[2];
 		System.out.print("Please enter the row number: ");
 		choice[0] = input.nextInt() + 1;
 		System.out.print("Please enter the col number: ");
 		choice[1] = input.nextInt() + 1;
-		input.close();
+		//input.close();
 		return choice;
+	}
+	
+	// Things happen when hit the ship, should be used in fireCannon(int[])
+	public void hitShip(int shipNumber, int[] playerChoice){
+		battleShips[shipNumber].gotHit();
+		gameBoard[playerChoice[0]][playerChoice[1]] = -1;
+		if (battleShips[shipNumber].checkSink()){
+			System.out.println("Congratulations! You elimated battle ship " + shipNumber + "!");
+		}
 	}
 	
 	public void showBoard(){
 		for (int row = 0; row < BOARDROWS; row++){
 			for (int col = 0; col < BOARDCOLS; col++){
-				System.out.print(gameBoard[row][col]);
-				System.out.print("  ");
+				System.out.printf("%3d", gameBoard[row][col]);
 			}
 			System.out.print("\n");
 		}
+	}
+	
+	public boolean checkWin(){
+		for (int row = 0; row < BOARDROWS; row++){
+			for (int col = 0; col < BOARDCOLS; col++){
+				for (int i = 1; i <= 8; i++){
+					if (gameBoard[row][col] == i){
+						return false;
+					}
+				}
+			}
+		}
+		return true;
 	}
 	
 	public static void main(String[] args) {
@@ -146,5 +185,10 @@ public class Game {
 		Game game = new Game();
 		game.newGame();
 		game.showBoard();
+		do {
+			game.fireCannon();
+			game.showBoard();
+		} while(game.checkWin() == false);
+		System.out.println("You win!");
 	}
 }
