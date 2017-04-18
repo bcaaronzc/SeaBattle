@@ -9,14 +9,14 @@ public class Game {
 	int gameBoard[][] = new int[BOARDROWS][BOARDCOLS];
 	
 	int maxShipNum = ((BOARDROWS + 1) / 2) * ((BOARDCOLS + 1) / 2);
-	BattleShip battleShips[] = new BattleShip[maxShipNum];
+	BattleShip battleShips[] = new BattleShip[maxShipNum + 1];
 	
 	private void newGame(){
 		// TODO Implement function to change difficulty, default 3
 		// Initialize the game board
 		for (int row = 0; row < BOARDROWS; row++){
 			for (int col = 0; col < BOARDCOLS; col++){
-				gameBoard[row][col] = 3;
+				gameBoard[row][col] = 9;
 			}
 		}
 		for (int row = 1; row < BOARDROWS - 1; row++){
@@ -26,7 +26,7 @@ public class Game {
 		}
 		
 		// Add ships
-		for (int i = 0; i < difficulty; i++){
+		for (int i = 1; i <= difficulty; i++){
 			boolean randomDirectionBool;
 			int randomDirection = (int)(Math.random() * 2);
 			if (randomDirection == 0){
@@ -100,12 +100,12 @@ public class Game {
 		// Add this ship to game board
 		if (battleShips[number].isVertical){
 			for (int row = battleShips[number].loc[0]; row < battleShips[number].loc[0] + battleShips[number].size; row++){
-				gameBoard[row][battleShips[number].loc[1]] = 1;
+				gameBoard[row][battleShips[number].loc[1]] = number;
 			}
 		}
 		else{
 			for (int col = battleShips[number].loc[1]; col < battleShips[number].loc[1] + battleShips[number].size; col++){
-				gameBoard[battleShips[number].loc[0]][col] = 1;
+				gameBoard[battleShips[number].loc[0]][col] = number;
 			}
 		}
 	}
