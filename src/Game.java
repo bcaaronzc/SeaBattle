@@ -111,8 +111,8 @@ public class Game {
 		}
 	}
 
-	public void fireCannon(){
-		int playerChoice[] = playerChoice();
+	public void fireCannon(int playerChoice[]){
+		//int playerChoice[] = playerChoice();
 		int choice = gameBoard[playerChoice[0]][playerChoice[1]];
 		switch (choice){
 		case -1:
@@ -168,11 +168,11 @@ public class Game {
 	}
 
 	public int getBoardRow(){
-		return smallBoardRows;
+		return BOARDROWS;
 	}
 	
 	public int getBoardCols(){
-		return smallBoardCols;
+		return BOARDCOLS;
 	}
 	
 	public boolean checkWin(){
@@ -194,7 +194,8 @@ public class Game {
 		game.newGame();
 		game.showBoard();
 		do {
-			game.fireCannon();
+			int playerChoice[] = game.playerChoice();
+			game.fireCannon(playerChoice);
 			game.showBoard();
 		} while(game.checkWin() == false);
 		System.out.println("You win!");
