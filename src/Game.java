@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
 public class Game {
-	static int smallBoardRows = 10;
-	static int smallBoardCols = 10;
-	static int BOARDROWS = smallBoardRows + 2;
-	static int BOARDCOLS = smallBoardCols + 2;
-	static int difficulty = 3;
-	static int sinkShip = 0;
+	private int smallBoardRows = 10;
+	private int smallBoardCols = 10;
+	private int BOARDROWS = smallBoardRows + 2;
+	private int BOARDCOLS = smallBoardCols + 2;
+	private int difficulty = 3;
+	private int sinkShip = 0;
 	int gameBoard[][] = new int[BOARDROWS][BOARDCOLS];
 	
 	int maxShipNum = ((BOARDROWS + 1) / 2) * ((BOARDCOLS + 1) / 2);
@@ -165,6 +165,14 @@ public class Game {
 			}
 			System.out.print("\n");
 		}
+	}
+
+	public int getBoardRow(){
+		return smallBoardRows;
+	}
+	
+	public int getBoardCols(){
+		return smallBoardCols;
 	}
 	
 	public boolean checkWin(){
