@@ -14,11 +14,12 @@ public class GameGUI extends JFrame{
 	}
 	
 	public void gameStart(){
-		int numButton = game.getBoardRow() * game.getBoardCols();
-		JButton buttons[] = new JButton[numButton];
-		for (int i = 0; i < numButton; i++){
-			buttons[i] = new JButton("" + i);
-			this.add(buttons[i]);
+		JButton buttons[][] = new JButton[game.getBoardRow()][game.getBoardCols()];
+		for (int row = 0; row < game.getBoardRow(); row++){
+			for (int col = 0; col < game.getBoardCols(); col++){
+				buttons[row][col] = new JButton(row + ", " + col);
+				this.add(buttons[row][col]);
+			}
 		}
 	}
 	
